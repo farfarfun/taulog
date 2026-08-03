@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "nltlog"
-version = "1.1.4"
+version = "1.1.5"
 description = "Small Loguru helper for named rotating log files"
 readme = "README.md"
 requires-python = ">=3.9"
