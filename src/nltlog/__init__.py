@@ -1,3 +1,3 @@
-from .core import get_logger, getLogger
+from .core import configure, get_logger, getLogger
 
-__all__ = ["get_logger", "getLogger"]
+__all__ = ["configure", "getLogger", "get_logger"]
