@@ -1,6 +1,6 @@
-# nltlog
+# farlog
 
-`nltlog` 是一个轻量的 [Loguru](https://github.com/Delgan/loguru) 辅助库，用于按名称拆分日志文件，并提供开箱即用的按日轮转、压缩和保留策略。
+`farlog` 是一个轻量的 [Loguru](https://github.com/Delgan/loguru) 辅助库，用于按名称拆分日志文件，并提供开箱即用的按日轮转、压缩和保留策略。
 
 ## 特性
 
@@ -18,7 +18,7 @@
 ## 安装
 
 ```bash
-pip install nltlog
+pip install farlog
 ```
 
 ## 快速开始
@@ -28,7 +28,7 @@ pip install nltlog
 直接调用 `get_logger()` 会保留应用已有的 Loguru handler，并在默认的 `logs/` 目录中创建命名日志文件。
 
 ```python
-from nltlog import get_logger
+from farlog import get_logger
 
 log = get_logger("worker")
 log.info("任务开始")
@@ -46,7 +46,7 @@ logs/
 需要统一控制台格式或生成 `all.log` 时，在应用启动阶段显式调用 `configure()`：
 
 ```python
-from nltlog import configure, get_logger
+from farlog import configure, get_logger
 
 configure("logs")
 
@@ -94,7 +94,7 @@ get_logger("../outside")  # ValueError
 旧接口仍然可用：
 
 ```python
-from nltlog import getLogger
+from farlog import getLogger
 
 log = getLogger("worker")
 ```

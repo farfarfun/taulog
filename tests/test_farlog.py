@@ -9,7 +9,7 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).parents[1] / "src"))
 
 
-class NltlogTest(unittest.TestCase):
+class FarlogTest(unittest.TestCase):
     def test_logger_lifecycle(self):
         from loguru import logger
 
@@ -21,18 +21,18 @@ class NltlogTest(unittest.TestCase):
                 host_messages = []
                 logger.add(host_messages.append, format="{message}")
 
-                import nltlog
+                import farlog
 
                 self.assertFalse(Path("logs").exists())
                 logger.info("host handler preserved")
                 self.assertEqual(str(host_messages[0]), "host handler preserved\n")
 
-                first = nltlog.get_logger()
-                self.assertIs(first, nltlog.get_logger("default"))
-                self.assertIs(first, nltlog.get_logger(name="default"))
+                first = farlog.get_logger()
+                self.assertIs(first, farlog.get_logger("default"))
+                self.assertIs(first, farlog.get_logger(name="default"))
                 first.info("once")
 
-                updated = nltlog.get_logger("default", level="DEBUG")
+                updated = farlog.get_logger("default", level="DEBUG")
                 self.assertIs(first, updated)
                 updated.info("twice")
 
@@ -42,7 +42,7 @@ class NltlogTest(unittest.TestCase):
 
                 stderr = io.StringIO()
                 with redirect_stderr(stderr):
-                    nltlog.configure("var/log")
+                    farlog.configure("var/log")
                     logger.info("unbound")
                     updated.info("after configure")
 
@@ -53,7 +53,7 @@ class NltlogTest(unittest.TestCase):
                 self.assertNotIn("Logging error", stderr.getvalue())
 
                 with self.assertRaises(ValueError):
-                    nltlog.get_logger("../escaped")
+                    farlog.get_logger("../escaped")
                 self.assertFalse(any(Path(".").rglob("escaped.log")))
             finally:
                 logger.remove()
