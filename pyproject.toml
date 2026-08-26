@@ -22,8 +22,8 @@ name = "farfarfun"
 email = "farfarfun@qq.com"
 [project.urls]
 Organization = "https://github.com/farfarfun"
-Repository = "https://github.com/farfarfun/nltlog"
-Releases = "https://github.com/farfarfun/nltlog/releases"
+Repository = "https://github.com/farfarfun/farlog"
+Releases = "https://github.com/farfarfun/farlog/releases"
 
 [[project.maintainers]]
 name = "牛哥"
