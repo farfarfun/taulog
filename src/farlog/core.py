@@ -3,8 +3,12 @@ from __future__ import annotations
 import sys
 from pathlib import Path
 from threading import Lock
+from typing import TYPE_CHECKING
 
 from loguru import logger
+
+if TYPE_CHECKING:
+    from loguru import Logger
 
 _DEFAULT_FORMAT = (
     "{time:YYYY-MM-DD HH:mm:ss.SSS} |{level:8}| "
@@ -39,7 +43,14 @@ def _add_file_handler(name: str, level: str, formatter: str) -> int:
 
 
 def configure(log_dir: str | Path = "logs") -> None:
-    """Explicitly configure console and aggregate file logging."""
+    """显式配置控制台输出与聚合日志文件（`all.log`）。
+
+    Args:
+        log_dir: 日志文件存放目录，默认 "logs"。
+
+    Returns:
+        None。
+    """
     global _log_dir
 
     with _lock:
@@ -86,8 +97,17 @@ def get_logger(
     name: str = "default",
     level: str = "INFO",
     formatter: str | None = None,
-):
-    """Get a named logger with one rotating file handler."""
+) -> Logger:
+    """获取一个按名称拆分、带单个按日轮转文件 handler 的 logger。
+
+    Args:
+        name: logger 名称，同时作为对应日志文件名（不能是路径、`.`/`..` 或含空字符）。
+        level: 日志级别，默认 "INFO"。
+        formatter: 可选的 Loguru 格式字符串，不传则使用默认格式。
+
+    Returns:
+        绑定了 `module_name` 的 Loguru logger 实例。
+    """
     _validate_name(name)
     selected_formatter = formatter or _DEFAULT_FORMAT
 

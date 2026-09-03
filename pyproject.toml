@@ -36,4 +36,4 @@ email = "farfarfun@qq.com"
 farlog = ["py.typed"]
 
 [tool.ruff]
-target-version = "py39"
+target-version = "py310"
